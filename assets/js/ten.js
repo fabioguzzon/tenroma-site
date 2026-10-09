@@ -85,7 +85,6 @@
         // corpo form-urlencoded: richiesta "semplice", nessun preflight CORS
         const r = await fetch(endpoint, { method: 'POST', body: new URLSearchParams(fd) });
         const data = await r.json().catch(() => ({}));
-        if (r.status === 429) { msg.textContent = 'Too many attempts. Please try again in an hour.'; return; }
         if (!r.ok || !data.ok) throw new Error(r.status);
         form.reset();
         msg.textContent = 'Thank you. We read every application personally, and we will reply.';
