@@ -21,7 +21,7 @@
 <link rel="preload" href="assets/fonts/BodoniModa-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/InterTight-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
-<link rel="stylesheet" href="assets/css/ten.css?v=3">
+<link rel="stylesheet" href="assets/css/ten.css?v=4">
 </head>
 <body class="is-loading">
 
@@ -474,9 +474,10 @@
       <h2 class="display split">X marks your place.</h2>
       <p class="lede reveal">The tenth chapter is yours to write. Tell us about yourself: we read every application personally, and we will reply.</p>
     </div>
-    <!-- Destinazione candidature: data-endpoint (POST JSON formato Farmaware /consumer/contact) oppure data-mailto (casella TEN).
-         Se entrambi vuoti il form avvisa che le candidature non sono ancora aperte. -->
-    <form class="form" novalidate data-endpoint="" data-mailto="">
+    <!-- Candidature: POST a blufarma.it/ten/apply.php (sorgente tenroma-site/server/apply.php), che le manda
+         per email ad Alessio e Fabio. data-mailto resta come ripiego se l'invio fallisce. -->
+    <form class="form" novalidate data-endpoint="https://www.blufarma.it/ten/apply.php" data-mailto="alessiotenoglio@gmail.com,fabio.guzzon@gmail.com">
+      <label class="form__trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
       <div class="form__row">
         <label class="field"><input name="first_name" autocomplete="given-name" required placeholder=" "><span>First name</span></label>
         <label class="field"><input name="last_name" autocomplete="family-name" required placeholder=" "><span>Last name</span></label>
@@ -495,7 +496,7 @@
         <label><input type="radio" name="frame" value="matteo"><span>Matteo</span></label>
         <label><input type="radio" name="frame" value="undecided" checked><span>Not sure yet</span></label>
       </fieldset>
-      <label class="check"><input type="checkbox" name="privacy" required><span>I have read the privacy notice and agree to TEN processing my data to evaluate this application.</span></label>
+      <label class="check"><input type="checkbox" name="privacy" required><span>I agree to TEN using these details only to evaluate my application and to reply to me. They are not shared with third parties.</span></label>
       <button class="btn btn--light form__submit" type="submit"><span>Send application</span></button>
       <p class="form__msg" role="status" aria-live="polite"></p>
     </form>
@@ -521,6 +522,6 @@
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/SplitText.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="assets/js/ten.js?v=3"></script>
+<script src="assets/js/ten.js?v=4"></script>
 </body>
 </html>

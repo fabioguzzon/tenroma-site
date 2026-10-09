@@ -82,18 +82,19 @@
     if (endpoint) {
       msg.textContent = 'Sending…';
       try {
-        const r = await fetch(endpoint, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            brand_code: 'ten', subject: 'Candidatura TEN',
-            name: `${fd.get('first_name')} ${fd.get('last_name')}`.trim(),
-            email: fd.get('email'), message: applicationText(fd),
-          }),
-        });
-        if (!r.ok) throw new Error(r.status);
+        // corpo form-urlencoded: richiesta "semplice", nessun preflight CORS
+        const r = await fetch(endpoint, { method: 'POST', body: new URLSearchParams(fd) });
+        const data = await r.json().catch(() => ({}));
+        if (r.status === 429) { msg.textContent = 'Too many attempts. Please try again in an hour.'; return; }
+        if (!r.ok || !data.ok) throw new Error(r.status);
         form.reset();
         msg.textContent = 'Thank you. We read every application personally, and we will reply.';
-      } catch { msg.textContent = 'Something went wrong. Please try again in a moment.'; }
+      } catch {
+        msg.textContent = mailto
+          ? 'We could not send it automatically. Your email app will open with your application ready.'
+          : 'Something went wrong. Please try again in a moment.';
+        if (mailto) location.href = `mailto:${mailto}?subject=${encodeURIComponent('TEN · Application')}&body=${encodeURIComponent(applicationText(fd))}`;
+      }
     } else if (mailto) {
       location.href = `mailto:${mailto}?subject=${encodeURIComponent('TEN · Application')}&body=${encodeURIComponent(applicationText(fd))}`;
       msg.textContent = 'Your email app is opening with your application ready to send.';

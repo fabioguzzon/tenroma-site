@@ -549,6 +549,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; transitio
 .apply__x svg { width: 100%; height: auto; fill: rgba(236,230,220,.035); }
 .apply__grid { position: relative; display: grid; grid-template-columns: 5fr 6fr; gap: 7vw; align-items: start; }
 .form { display: grid; gap: 1.6rem; }
+.form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
 .field { position: relative; display: block; }
 .field input, .field textarea {
